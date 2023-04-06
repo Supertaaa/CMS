@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.List;
 
 @RestController
@@ -25,6 +26,17 @@ public class CampaignController {
 
     @Autowired
     CampaignReposirity campaignReposirity;
+
+
+    @PostMapping(path = "/readFile")
+    public void readFile(File file){
+        System.out.print(file.getName());
+    }
+
+
+
+
+
     @PostMapping(path = "/addCampaign")
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 
@@ -72,15 +84,30 @@ public class CampaignController {
     @GetMapping(path = "/getStatic")
 
     //@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-    public List<?> getStatic(@RequestParam int idCampaign, @RequestParam int noOfPage, @RequestParam int noObjectPerPage){
+//    public List<?> getStatic(int idCampaign, int noOfPage, int noObjectPerPage){
+//        int type = campaignReposirity.findById(idCampaign).get().getType();
+//        if(type == 0){
+//            return campaignReposirity.getEmailStatic(idCampaign, noOfPage, noObjectPerPage);
+//        }
+//        else if(type == 1){
+//            return campaignReposirity.getPhoneStatic(idCampaign, noOfPage, noObjectPerPage);
+//        }
+//        return null;
+//    }
+
+
+
+    public List<?> getStatic(int idCampaign){
         int type = campaignReposirity.findById(idCampaign).get().getType();
         if(type == 0){
-            return campaignReposirity.getEmailStatic(idCampaign, noOfPage, noObjectPerPage);
+            return campaignReposirity.getEmailStatic(idCampaign);
         }
         else if(type == 1){
-            return campaignReposirity.getPhoneStatic(idCampaign, noOfPage, noObjectPerPage);
+            return campaignReposirity.getPhoneStatic(idCampaign);
         }
         return null;
     }
+
+
 
 }
