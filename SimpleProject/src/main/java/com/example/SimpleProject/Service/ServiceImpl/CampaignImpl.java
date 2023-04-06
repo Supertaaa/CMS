@@ -10,10 +10,10 @@ import com.example.SimpleProject.Service.CampaignService;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -107,20 +107,21 @@ public class CampaignImpl implements CampaignService {
     }
 
     @Override
-    public String importPhoneEmail(int idCampaign, String fileName) {
+    public String importPhoneEmail(String idCampaign, MultipartFile fileName) {
 
-        Optional<Campaign> newCampaign = campaignReposirity.findById(idCampaign);
-        newCampaign.get().setFileName(fileName);
+        Optional<Campaign> newCampaign = campaignReposirity.findById(Integer.parseInt(idCampaign));
 
         if(newCampaign.isPresent()){
+            newCampaign.get().setFileName(fileName.getName());
             String line = "";
             String splitBy = ",";
             if(newCampaign.get().getType() == 0){
 
                 try
                 {
+                    InputStream inputStream = fileName.getInputStream();
 
-                    BufferedReader br = new BufferedReader(new FileReader("/Users/apple/Downloads/Tranning_Vega/SimpleProject/src/main/resources/static/" + fileName));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                     while ((line = br.readLine()) != null)   //returns a Boolean value
                     {
                         Email email = new Email();
@@ -148,7 +149,9 @@ public class CampaignImpl implements CampaignService {
                 try
                 {
 
-                    BufferedReader br = new BufferedReader(new FileReader("/Users/apple/Downloads/Tranning_Vega/SimpleProject/src/main/resources/static/" + fileName));
+                    InputStream inputStream = fileName.getInputStream();
+
+                    BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                     while ((line = br.readLine()) != null)   //returns a Boolean value
                     {
                         Phone phone = new Phone();

@@ -5,12 +5,16 @@ package com.example.SimpleProject.Controller;
 import com.example.SimpleProject.Entities.Campaign;
 import com.example.SimpleProject.Repository.CampaignReposirity;
 import com.example.SimpleProject.Service.CampaignService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @RestController
@@ -23,16 +27,8 @@ public class CampaignController {
     @Autowired
     CampaignService campaignService;
 
-
     @Autowired
     CampaignReposirity campaignReposirity;
-
-
-    @PostMapping(path = "/readFile")
-    public void readFile(File file){
-        System.out.print(file.getName());
-    }
-
 
 
 
@@ -47,8 +43,8 @@ public class CampaignController {
 
     @PostMapping(path = "/insertData")
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public String insertData(int idCampaign,String nameFile){
-        return campaignService.importPhoneEmail(idCampaign, nameFile);
+    public String insertData(String idCampaign,MultipartFile file){
+        return campaignService.importPhoneEmail(idCampaign, file);
     }
 
     @PutMapping(path = "/updateCampaign")
