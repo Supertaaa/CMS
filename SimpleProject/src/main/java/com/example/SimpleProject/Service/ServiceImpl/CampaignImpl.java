@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -35,8 +35,6 @@ public class CampaignImpl implements CampaignService {
 
     @Override
     public Campaign createCampaign(Campaign campaign) {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
         System.out.println(campaign.getName());
 

@@ -80,7 +80,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span id="spantag" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -119,7 +119,7 @@
                 <label >Voice:</label><br>
                 <input type="text" id="voice" name="voice"><br><br>
 
-                <button  class="updateCampaign">Create Phone</button>
+                <button  class="updateCampaign">Update Campaign</button>
             </div>
         </div>
     </div>
@@ -150,13 +150,58 @@
                 encode: true,
                 headers:{"Authorization": "Bearer " + $.cookie("token")},
                 success: function(res){
-                    console.log(res);
+                    if(res != null){
+                        console.log(res);
+                        alert("Updated")
+                    }
+                    else{
+                        alert("Not found campaign")
+                    }
+                    
+                    
+                    
+                },error: function(){
+                    alert("Not found campaign")
                 }
         
     
             })
         })
     </script>
+
+    <script>
+        $(document).ready(function(){
+            if(!$.cookie("token")){
+                window.location.href = "login.html"
+            }
+            else{
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/user/getRole",
+                    data: { "token": $.cookie("token")},
+                    headers:{"Authorization": "Bearer " + $.cookie("token")},
+                    success: function(data){
+                        if(data == "USER"){
+                            window.location.href = "index.html"
+                        }
+                        else{
+                            $.ajax({
+                                type: "GET",
+                                url: "http://localhost:8080/user/getUserName",
+                                data: { "token": $.cookie("token")},
+                                headers:{"Authorization": "Bearer " + $.cookie("token")},
+                                success: function(data){
+                                    $("#spantag").text(data)
+                                },
+                            })
+                        }
+                    },
+                })
+            }
+            
+        })
+    </script>
+
                 
 
 </body>

@@ -80,7 +80,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span id="spantag" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <span id="spantag" class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -98,35 +98,79 @@
 
                 </nav>
                 
-                <label >Id:</label><br>
+                <input id="idCampaign" type="text" name="extraField"/><br/><br/>
+                <input type="file" id="file" style="display:none;" />
+                <!-- <button id="importButtom" name="button" value="Upload" onclick="window.location.href = '/import_data.html';">Import Data to Campaign</button> -->
+                <button id="importData" name="button" value="Upload" onclick="thisFileUpload();">Import Data to Campaign</button>
+                
+
+
+                <!-- <label >Id:</label><br>
                 <input type="text" id="id" name="id" ><br><br>
 
-                <button  class="delEmail">Delete Email</button>
+                <button  class="delCampaign">Create Phone</button> -->
             </div>
         </div>
     </div>
 
     <script>
-        $(document).on('click','.delEmail',function(){
+        $("#file").change(function(){
+            var formData = new FormData()
 
+            console.log(this.files[0])
+            formData.append('file', this.files[0])
+            formData.append('idCampaign', $("#idCampaign").val())
+            //var file = $('#file').val();
+
+            
+            console.log(formData)
+            let file = formData.get('file')
+
+            let reader = new FileReader();
+
+            reader.readAsText(file);
+
+            reader.onload = function() {
+                console.log(reader.result);
+            };
+
+            reader.onerror = function() {
+                console.log(reader.error);
+            };
+
+
+
+
+
+            console.log(file)
             $.ajax({
-                method: "DELETE",
-                url: "http://localhost:8080/email/delEmail",
-                data: {idEmail: $("#id").val()},
-                dataType: "json",
-                encode: true,
+                type: "POST",
+                url: "http://localhost:8080/Campaign/insertData",
+                data: formData,
+                processData: false, 
+                contentType: false, 
+                enctype: 'multipart/form-data',
+
+
+
+
                 headers:{"Authorization": "Bearer " + $.cookie("token")},
-                success: function(res){
-                   
+                success: function(){
+                    console.log("Success")
+                    alert("Imported")
                 },
-                error: function(res){
-                   
-                    alert(res.responseText)
+                error: function(){
+                    console.log("Error")
+                    alert("Error")
                 }
-        
-    
+
             })
         })
+    </script>
+    <script>
+        function thisFileUpload() {
+            document.getElementById("file").click();
+        };
     </script>
 
     <script>

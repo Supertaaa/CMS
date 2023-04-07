@@ -56,4 +56,19 @@ public class TokenAuthenticationService {
         }
         return null;
     }
+
+    public static String GetRoleFromSub(String sub){
+
+        String s = "";
+
+        for(int i = 8; i < sub.length(); i++){
+            if ((int)sub.charAt(i) != 34){
+                s = s + sub.charAt(i);
+            }
+            else{
+                break;
+            }
+        }
+        return s;
+    }
 }

@@ -94,6 +94,7 @@ public class CampaignController {
 
 
     public List<?> getStatic(int idCampaign){
+        if (!campaignReposirity.existsById(idCampaign)){return null;}
         int type = campaignReposirity.findById(idCampaign).get().getType();
         if(type == 0){
             return campaignReposirity.getEmailStatic(idCampaign);

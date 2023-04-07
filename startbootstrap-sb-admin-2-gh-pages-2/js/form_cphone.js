@@ -9,7 +9,7 @@ $(document).ready(function () {
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/phone/addPhone",
-        headers:{"Authen": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdXlldHRvYmVsZXQiLCJleHAiOjE2ODE0NDMwODJ9.B1BX_aBQ8gKVR4bsi2ZMdQycwu0PHs7W1jBT826SDEYZpPQniGkOJbKMyWcLp0oxWK_-TNGT2Bod2W6F8-ayIQ"},
+        headers:{"Authorization": "Bearer " + $.cookie("token")},
         data: formData,
         dataType: "json",
         encode: true,

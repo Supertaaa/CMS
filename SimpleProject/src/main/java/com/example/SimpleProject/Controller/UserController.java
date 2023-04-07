@@ -17,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -32,13 +33,28 @@ public class UserController {
 
 
     @GetMapping(path = "/getRole")
-    public String getUsername(String userName) {
-       return userRepository.findByUserName(userName).getRole();
+    public String getRole(String token) {
+
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+
+        return userRepository.findByUserName(TokenAuthenticationService.GetRoleFromSub(payload)).getRole();
+    }
+
+    @GetMapping(path = "/getUserName")
+    public String getUsername(String token) {
+
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+
+        return TokenAuthenticationService.GetRoleFromSub(payload);
     }
 
     @PostMapping(path = "/createUser")
     public String createUser(User user){
-        if (userRepository.existsUserByUserName(user.getUserName())){return null;}
+        if (userRepository.existsUserByUserName(user.getUserName())){return "User Existed";}
         User newUser = new User();
         newUser.setUserName(user.getUserName());
         newUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
@@ -56,24 +72,6 @@ public class UserController {
         if (!BCrypt.checkpw(user.getPassword(), password)){
             return null;
         }
-
-        ResponseCookie cookie = ResponseCookie.from("ROLE", u.getRole()) // key & value
-                .httpOnly(true)
-                .secure(false)
-                //    .domain("localhost")  // host
-                //    .path("/")      // path
-                .sameSite("None")  // sameSite
-                .build()
-                ;
-
-        // Response to the client
-        response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
-        response.setHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Set-Cookie");
-
-
-
-        // Response to the client
-        //response.addCookie(new Cookie("ROLE", u.getRole()));
         return TokenAuthenticationService.getToken(user.getUserName());
     }
 }
