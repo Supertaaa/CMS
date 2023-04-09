@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 @Service
 @Transactional
@@ -30,15 +31,18 @@ public class PhoneImpl implements PhoneService {
         System.out.println(phone.getCampaignId());
         Optional<Campaign> campaign = campaignReposirity.findById(phone.getCampaignId());
         if (campaign.isPresent()){
-            newPhone.setCreatedDate(new Timestamp(System.currentTimeMillis()));
-            newPhone.setStatus(phone.getStatus());
-            newPhone.setPhone(phone.getPhone());
-            newPhone.setServiceId(campaign.get().getServiceId());
-            newPhone.setTelcoId(campaign.get().getTelcoId());
-            newPhone.setRetry(campaign.get().getRetry());
-            newPhone.setCampaignId(campaign.get().getId());
-
-
+            if (campaign.get().getType() != 1){
+                return null;
+            }
+            else{
+                newPhone.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+                newPhone.setStatus(phone.getStatus());
+                newPhone.setPhone(phone.getPhone());
+                newPhone.setServiceId(campaign.get().getServiceId());
+                newPhone.setTelcoId(campaign.get().getTelcoId());
+                newPhone.setRetry(campaign.get().getRetry());
+                newPhone.setCampaignId(campaign.get().getId());
+            }
             phoneReposirity.save(newPhone);
             return newPhone;
         }
@@ -49,18 +53,24 @@ public class PhoneImpl implements PhoneService {
     public Phone updatePhoone(Phone phone) {
 
         Optional<Phone> newPhone = phoneReposirity.findById(phone.getId());
-
+        Optional<Campaign> campaign = campaignReposirity.findById(phone.getCampaignId());
         if(newPhone.isPresent()){
-            newPhone.get().setCreatedDate(new Timestamp(System.currentTimeMillis()));
-            newPhone.get().setStatus(phone.getStatus());
-            newPhone.get().setPhone(phone.getPhone());
-            newPhone.get().setServiceId(phone.getServiceId());
-            newPhone.get().setTelcoId(phone.getTelcoId());
-            newPhone.get().setRetry(phone.getRetry());
-            newPhone.get().setCampaignId(phone.getCampaignId());
+            if(campaign.isPresent()){
+                if (campaign.get().getType() != 1){return null;}
+                else {
+                    newPhone.get().setUpdatedDate(new Timestamp(System.currentTimeMillis()));
+                    newPhone.get().setStatus(phone.getStatus());
+                    newPhone.get().setPhone(phone.getPhone());
+                    newPhone.get().setServiceId(campaign.get().getServiceId());
+                    newPhone.get().setTelcoId(campaign.get().getTelcoId());
+                    newPhone.get().setRetry(campaign.get().getRetry());
+                    newPhone.get().setCampaignId(phone.getCampaignId());
+                }
+                phoneReposirity.save(newPhone.get());
+                return newPhone.get();
+            }
+            else{return null;}
 
-            phoneReposirity.save(newPhone.get());
-            return newPhone.get();
         }
 
         return null;

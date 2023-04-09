@@ -11,28 +11,48 @@ $(document).ready(function(){
           
         };
 
-        
-        
-        $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: formData,
-            dataType: "json",
-            encode: true,
-            error: function (data) {
-                console.log(data.responseText);
-                console.log(data)
-                $.cookie("token", data.responseText)
-                console.log($.cookie("token"))
-                if (data.responseText.localeCompare("") != 0){
-                    
-                    //window.location.href = "/index.html";
-                    
-                }
+        if($("#exampleInputEmail").val().localeCompare("") == 0){
+            alert("Empty Username")
+        }
+
+        else if($("#exampleInputPassword").val().localeCompare("") == 0){
+            alert("Empty Password")
+        }
+
+        else{
+            $.ajax({
+                type: frm.attr('method'),
+                url: frm.attr('action'),
+                data: formData,
+                dataType: "json",
+                encode: true,
                 
-            },
-            
-        })
+                error: function (data, status, xhr) {
+                    console.log(data.responseText);
+                    console.log(data)
+                    $.cookie("token", data.responseText)
+                    
+                    console.log(data.getAllResponseHeaders());
+                    
+    
+                    if (data.responseText.localeCompare("") != 0){
+                        
+                        window.location.href = "/index.html";
+                        
+                        
+                    }
+                    else{
+                        alert("Not correct username or password")
+                    }
+                    
+                },
+                
+            })
+        }
+
+        
+        
+        
     
     })
 })

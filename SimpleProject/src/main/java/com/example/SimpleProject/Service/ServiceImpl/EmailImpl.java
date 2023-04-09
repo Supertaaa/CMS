@@ -30,15 +30,21 @@ public class EmailImpl implements EmailService {
         Optional<Campaign> campaign = campaignReposirity.findById(email.getCampaignId());
         Email newEmail = new Email();
 
-        newEmail.setCreatedDate(new Timestamp(System.currentTimeMillis()));
-        newEmail.setStatus(email.getStatus());
-        newEmail.setEmail(email.getEmail());
-        newEmail.setRepeat(email.getRepeat());
-        newEmail.setServiceId(campaign.get().getServiceId());
-        newEmail.setCampaignId(email.getCampaignId());
+        if(campaign.isPresent()){
+            if(campaign.get().getType() != 0){return null;}
 
-        emailReposirity.save(newEmail);
-        return newEmail;
+            newEmail.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+            newEmail.setStatus(email.getStatus());
+            newEmail.setEmail(email.getEmail());
+            newEmail.setRepeat(email.getRepeat());
+            newEmail.setServiceId(campaign.get().getServiceId());
+            newEmail.setCampaignId(email.getCampaignId());
+
+            emailReposirity.save(newEmail);
+            return newEmail;
+        }
+        return null;
+
     }
 
     @Override
@@ -46,20 +52,27 @@ public class EmailImpl implements EmailService {
 
         Optional<Email> newEmail = emailReposirity.findById(email.getId());
 
-        if(newEmail.isPresent()){
-            newEmail.get().setUpdatedDate(new Timestamp(System.currentTimeMillis()));
-            newEmail.get().setStatus(email.getStatus());
-            newEmail.get().setEmail(email.getEmail());
-            newEmail.get().setRepeat(email.getRepeat());
-            newEmail.get().setServiceId(email.getServiceId());
-            newEmail.get().setCampaignId(email.getCampaignId());
+        Optional<Campaign> campaign = campaignReposirity.findById(email.getCampaignId());
 
-            emailReposirity.save(newEmail.get());
+        if (newEmail.isPresent()){
+            if (campaign.isPresent()){
+                if(campaign.get().getType() != 0){return null;}
 
-            return newEmail.get();
+                newEmail.get().setUpdatedDate(new Timestamp(System.currentTimeMillis()));
+                newEmail.get().setStatus(email.getStatus());
+                newEmail.get().setEmail(email.getEmail());
+                newEmail.get().setRepeat(email.getRepeat());
+                newEmail.get().setServiceId(campaign.get().getServiceId());
+                newEmail.get().setCampaignId(email.getCampaignId());
+
+                emailReposirity.save(newEmail.get());
+
+                return newEmail.get();
+            }
         }
 
         return null;
+
     }
 
     @Override

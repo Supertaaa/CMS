@@ -83,7 +83,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span id="spantag" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -116,14 +116,14 @@
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
-                                <button onclick="window.location.href = '/create_campaign.html';" >Create Campaign</button>
+                                <button class="createCampaign" onclick="window.location.href = '/create_campaign.html';" >Create Campaign</button>
             
                             </div>
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
-                                <button onclick="window.location.href = '/update_campaign.html';" >Update Campaign</button>
+                                <button class="updateCampaign" onclick="window.location.href = '/update_campaign.html';" >Update Campaign</button>
                                 <!-- <button class="button button1" >Update Campaign</button> -->
                             
                             </div>
@@ -138,13 +138,18 @@
                         </div>
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
-                                <button class="button_getCam" onclick="convertCampaign( )">Get Camapaign List</button>
+                                <button class="button_getCam">Get Camapaign List</button>
                             </div>
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
-                                <button class="button button1">Import Data to Campaign</button>
+                                
+
+                                <input type="file" id="file" style="display:none;" />
+                                <button id="importButtom" name="button" value="Upload" onclick="window.location.href = '/import_data.html';">Import Data to Campaign</button>
+                                <!-- <button id="importData" name="button" value="Upload" onclick="thisFileUpload();">Import Data to Campaign</button> -->
+                                <!-- <button class="importData">Import Data to Campaign</button> -->
                             </div>
                         </div>
 
@@ -194,12 +199,12 @@
 
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
-                                <button class="button_getPhone" onclick="convertPhone( )">Get Phone List</button>
+                                <button class="button_getPhone" >Get Phone List</button>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
-                                <button class="button_getStatic" >Get Static</button>
+                                <button class="button_getStatic" onclick="window.location.href = '/get_static.html';" >Get Static</button>
                             
                             </div>
                         </div>
@@ -211,7 +216,7 @@
 
                 </div>
 
-                <h3> Resulting Table Here: </h3> 
+                <h3> Static Table Here: </h3> 
                 <div id="container"></div>
                 
 
@@ -253,12 +258,22 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a id="sign_out" class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
+    <script>
+        $(document).on('click','#sign_out',function(){
+            var cookies = $.cookie();
+            for(var cookie in cookies) {
+            $.removeCookie(cookie);
+            }
+
+        })
+
+    </script>
     
     
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -275,6 +290,7 @@
                 success: function(res){
                     $(".phoneTable").remove();
                     $(".emailTable").remove();
+                    $(".campaignTable").remove();
                     
                     let jsonData = res
                     
@@ -321,6 +337,9 @@
         
     
             })
+
+            
+
         })
     </script>
 
@@ -334,6 +353,7 @@
                 success: function(res){
                     $(".phoneTable").remove();
                     $(".campaignTable").remove();
+                    $(".emailTable").remove();
                     let jsonData = res
                     
                     // Get the container element where the table will be inserted
@@ -392,6 +412,7 @@
                 success: function(res){
                     $(".emailTable").remove();
                     $(".campaignTable").remove();
+                    $(".phoneTable").remove();
                     let jsonData = res
                     
                     // Get the container element where the table will be inserted
@@ -440,14 +461,60 @@
         })
     </script>
 
+
+
     <script>
         $(document).ready(function(){
-            
+
                 
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/user/getRole",
+                    data: { "token": $.cookie("token")},
+                    headers:{"Authorization": "Bearer " + $.cookie("token")},
+                    success: function(data){
+                        if(data == "USER"){
+                            $(".delCampaign").prop('disabled', true);
+                            $(".delEmail").prop('disabled', true);
+                            $(".delPhone").prop('disabled', true);
+
+
+                            $(".createPhone").prop('disabled', true);
+                            $(".updatePhone").prop('disabled', true);
+                            $(".createEmail").prop('disabled', true);
+                            
+                            $("#importButtom").prop('disabled', true);
+                            
+                            $(".createCampaign").prop('disabled', true);
+                            $(".updateCampaign").prop('disabled', true);
+                        }
+                    },
+                })
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/user/getUserName",
+                    data: { "token": $.cookie("token")},
+                    headers:{"Authorization": "Bearer " + $.cookie("token")},
+                    success: function(data){
+                        $("#spantag").text(data)
+                    },
+                })
+
                 
-            
             });
     </script>
+
+    <script>
+        $(document).ready(function(){
+            if(!$.cookie("token")){
+                window.location.href = "login.html"
+            }
+        })
+    </script>
+
+    
+    
 
 
 
