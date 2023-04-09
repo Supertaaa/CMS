@@ -98,8 +98,11 @@
                     </ul>
 
                 </nav>
-                <label >CampaignId:</label><br>
-                <input type="text" id="campaignId" name="campaignId" ><br><br>
+                <!-- <label >CampaignId:</label><br>
+                <input type="text" id="campaignId" name="campaignId" ><br><br> -->
+
+                <select name="datas" id="datas"></select><br>
+
                 <label >Status:</label><br>
                 <input type="text" id="status" name="status" ><br><br>
                 <label >Phone:</label><br>
@@ -110,10 +113,13 @@
         </div>
     </div>
 
+    <script src="js/select.js"></script>
+
     <script>
         $(document).on('click','.createphone',function(){
             var formData = {
-                campaignId: $("#campaignId").val(),
+
+                campaignId:$('#datas').val(),
                 status: $("#status").val(),
                 phone: $("#phone").val(),
                 
@@ -143,6 +149,7 @@
         
     
             })
+            
         })
     </script>
 

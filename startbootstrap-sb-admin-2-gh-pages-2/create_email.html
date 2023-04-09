@@ -98,8 +98,8 @@
 
                 </nav>
                 
-                <label >CampaignId:</label><br>
-                <input type="text" id="campaignId" name="campaignId" ><br><br>
+                <select name="datas" id="datas"></select><br>
+
                 <label >Status:</label><br>
                 <input type="text" id="status" name="status" ><br><br>
                 <label >Email:</label><br>
@@ -112,17 +112,18 @@
             </div>
         </div>
     </div>
+    <script src="js/select.js"></script>
     <script>
         $(document).on('click','.createEmail',function(){
             var formData = {
-                campaignId: $("#campaignId").val(),
+                campaignId:$('#datas').val(),
                 status: $("#status").val(),
                 Email: $("#Email").val(),
                 repeat: $("#repeat").val(),
                 
             };
 
-            console.log(formData)
+            console.log($('#datas').val())
             $.ajax({
                 method: "POST",
                 url: "http://localhost:8080/email/addEmail",

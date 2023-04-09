@@ -99,6 +99,8 @@
                 </nav>
                 
                 <input id="idCampaign" type="text" name="extraField"/><br/><br/>
+
+                <select name="datas" id="datas"></select><br>
                 <input type="file" id="file" style="display:none;" />
                 <!-- <button id="importButtom" name="button" value="Upload" onclick="window.location.href = '/import_data.html';">Import Data to Campaign</button> -->
                 <button id="importData" name="button" value="Upload" onclick="thisFileUpload();">Import Data to Campaign</button>
@@ -112,6 +114,7 @@
             </div>
         </div>
     </div>
+    <script src="js/select.js"></script>
 
     <script>
         $("#file").change(function(){
@@ -119,7 +122,7 @@
 
             console.log(this.files[0])
             formData.append('file', this.files[0])
-            formData.append('idCampaign', $("#idCampaign").val())
+            formData.append('idCampaign', $('#datas').val())
             //var file = $('#file').val();
 
             

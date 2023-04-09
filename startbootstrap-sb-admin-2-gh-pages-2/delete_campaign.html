@@ -98,13 +98,14 @@
 
                 </nav>
                 
-                <label >Id:</label><br>
-                <input type="text" id="id" name="id" ><br><br>
+                <select name="datas" id="datas"></select><br>
 
                 <button  class="delCampaign">Delete Campaign</button>
             </div>
         </div>
     </div>
+
+    <script src="js/select.js"></script>
 
     <script>
         $(document).on('click','.delCampaign',function(){
@@ -112,7 +113,7 @@
             $.ajax({
                 method: "DELETE",
                 url: "http://localhost:8080/Campaign/delCampaign",
-                data: {idCampaign: $("#id").val()},
+                data: {idCampaign: $('#datas').val()},
                 dataType: "json",
                 encode: true,
                 headers:{"Authorization": "Bearer " + $.cookie("token")},

@@ -100,8 +100,8 @@
                 
                 <label >Id:</label><br>
                 <input type="text" id="id" name="id" ><br><br>
-                <label >CampaignId:</label><br>
-                <input type="text" id="campaignId" name="campaignId" ><br><br>
+                <select name="datas" id="datas"></select><br>
+                
                 <label >Status:</label><br>
                 <input type="text" id="status" name="status" ><br><br>
                 <label >Email:</label><br>
@@ -115,11 +115,12 @@
             </div>
         </div>
     </div>
+    <script src="js/select.js"></script>
     <script>
         $(document).on('click','.updateEmail',function(){
             var formData = {
                 id: $("#id").val(),
-                campaignId: $("#campaignId").val(),
+                campaignId: $('#datas').val(),
                 status: $("#status").val(),
                 Email: $("#Email").val(),
                 repeat: $("#repeat").val(),

@@ -98,8 +98,7 @@
 
                 </nav>
                 
-                <label >Id:</label><br>
-                <input type="text" id="id" name="id" ><br><br>
+                <select name="datas" id="datas"></select><br>
 
                 <button  class="getStatic">Get Static</button>
 
@@ -109,6 +108,7 @@
             </div>
         </div>
     </div>
+    <script src="js/select.js"></script>
 
     <script>
         $(document).on('click','.getStatic',function(){
@@ -117,7 +117,7 @@
                 method: "GET",
                 url: "http://localhost:8080/Campaign/getStatic",
                 headers:{"Authorization": "Bearer " + $.cookie("token")},
-                data: {idCampaign: $("#id").val()},
+                data: {idCampaign: $('#datas').val()},
                 success: function(res){
                     console.log(res)
                     if (res.length == 0){
