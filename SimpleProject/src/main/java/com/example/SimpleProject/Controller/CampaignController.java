@@ -57,7 +57,7 @@ public class CampaignController {
     @DeleteMapping(path = "/delCampaign")
 
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public String delCampaign(@RequestParam int idCampaign){
+    public String delCampaign(int idCampaign){
         return campaignService.delCampaign(idCampaign);
     }
 

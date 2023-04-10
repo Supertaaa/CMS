@@ -11,6 +11,7 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpHeaders;
@@ -27,10 +28,9 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-//    @Autowired
-//    UserService userService;
 
-
+    @Autowired
+    private PasswordEncoder encoder;
 
     @GetMapping(path = "/getRole")
     public String getRole(String token) {
@@ -57,7 +57,7 @@ public class UserController {
         if (userRepository.existsUserByUserName(user.getUserName())){return "User Existed";}
         User newUser = new User();
         newUser.setUserName(user.getUserName());
-        newUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        newUser.setPassword(encoder.encode(user.getPassword()));
         newUser.setRole("USER");
         userRepository.save(newUser);
         return TokenAuthenticationService.getToken(newUser.getUserName());

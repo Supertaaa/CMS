@@ -122,6 +122,7 @@ public class CampaignImpl implements CampaignService {
                     BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                     while ((line = br.readLine()) != null)   //returns a Boolean value
                     {
+                        if(line.split(splitBy).length != 3){return "Fail";}
                         Email email = new Email();
                         email.setStatus(Integer.parseInt(line.split(splitBy)[0]));
                         email.setCreatedDate(new Timestamp(System.currentTimeMillis()));
@@ -152,6 +153,7 @@ public class CampaignImpl implements CampaignService {
                     BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                     while ((line = br.readLine()) != null)   //returns a Boolean value
                     {
+                        if (line.split(splitBy).length != 2){return "Fail";}
                         Phone phone = new Phone();
                         phone.setStatus(Integer.parseInt(line.split(splitBy)[0]));
                         phone.setCreatedDate(new Timestamp(System.currentTimeMillis()));

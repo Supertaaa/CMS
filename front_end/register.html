@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Register</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-3.6.4.min"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form class="user" action="http://localhost:8080/user/createUser" method="POST">
+                                
+                                <div class="form-group">
+                                    <input type="user name" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="User name">
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Password">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                    </div>
+                                </div>
+                                <input type="submit" value="Register" class="btn btn-primary btn-user btn-block">
+                                <hr>
+                                
+                            </form>
+                            <hr>
+                            
+                            <div class="text-center">
+                                <a class="small" href="login.html">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+   
+    <script>
+        $(document).ready(function(){
+            var frm = $('.user');
+
+
+            checkUserHosting().then((data) => {
+                jsonUrl = data.deploy.url;
+                jsonPort = data.deploy.port
+                
+
+                frm.submit(function (e) {
+
+                    e.preventDefault();
+
+                    var formData = {
+                        userName: $("#exampleInputEmail").val(),
+                        password: $("#exampleInputPassword").val(),
+                    
+                    };
+
+                    if ($("#exampleInputEmail").val().localeCompare("") == 0){
+                        alert("Empty Username")
+                    }
+
+                    else if ($("#exampleInputPassword").val().localeCompare("") == 0){
+                        alert("Empty Password")
+                    }
+                    
+                    else if ($("#exampleRepeatPassword").val().localeCompare("") == 0){
+                        alert("Empty Repeat Password")
+                    }
+
+                    else{
+                        if ($("#exampleInputPassword").val().localeCompare($("#exampleRepeatPassword").val()) == 0 ){
+                        $.ajax({
+                            type: frm.attr('method'),
+                            url: jsonUrl+":"+jsonPort+"/user/createUser",
+                            //url: "http://localhost:8080/user/createUser",
+                            
+                            data: formData,
+                            dataType: "json",
+                            encode: true,
+                            
+                            error: function(data){
+                                console.log(data.responseText)
+                                if(data.responseText.localeCompare("")!=0 && data.responseText.localeCompare("User Existed")!=0){
+                                    $.cookie("token", data.responseText)
+                                    $.ajax({
+                                        type: "GET",
+                                        url: jsonUrl+":"+jsonPort+"/user/getRole",
+                                        //url: "http://localhost:8080/user/getRole",
+                                        data: {userName: $("#exampleInputEmail").val()},
+                                        headers:{"Authorization": "Bearer " + $.cookie("token")},
+                                        success: function(data){
+                                            console.log(data)
+                                            $.cookie("role", data)
+                                        },
+                                    })
+                                    window.location.href = "/index.html"
+                                }
+                                else{
+                                    alert(data.responseText)
+                                }
+                            }
+                            
+                        })
+                    }
+                    else{
+                        alert("Password doesnt mathch")
+                    }
+                    }
+                
+                })
+            })
+        })
+    </script>
+
+    <script src="js/config.js"></script>
+    
+
+
+
+</body>
+
+</html>
