@@ -22,14 +22,6 @@ public class TokenAuthenticationService {
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
 
-//    public static void addAuthentication(HttpServletResponse res, String username) {
-//        String JWT = Jwts.builder()
-//                .setSubject(username)
-//                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
-//                .signWith(SignatureAlgorithm.HS512, SECRET)
-//                .compact();
-//        res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
-//    }
 
     public static String getToken(String username){
 
@@ -56,11 +48,8 @@ public class TokenAuthenticationService {
         }
         return null;
     }
-
     public static String GetRoleFromSub(String sub){
-
         String s = "";
-
         for(int i = 8; i < sub.length(); i++){
             if ((int)sub.charAt(i) != 34){
                 s = s + sub.charAt(i);

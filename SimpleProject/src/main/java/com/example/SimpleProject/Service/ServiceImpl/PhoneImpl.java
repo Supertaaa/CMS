@@ -34,9 +34,10 @@ public class PhoneImpl implements PhoneService {
             if (campaign.get().getType() != 1){
                 return null;
             }
+            if(phone.getPhone().equals("")){return null;}
             else{
-                newPhone.setCreatedDate(new Timestamp(System.currentTimeMillis()));
-                newPhone.setStatus(phone.getStatus());
+                newPhone.setCreatedDate(java.time.LocalDate.now());
+                newPhone.setUpdatedDate(java.time.LocalDate.now());
                 newPhone.setPhone(phone.getPhone());
                 newPhone.setServiceId(campaign.get().getServiceId());
                 newPhone.setTelcoId(campaign.get().getTelcoId());
@@ -58,12 +59,18 @@ public class PhoneImpl implements PhoneService {
             if(campaign.isPresent()){
                 if (campaign.get().getType() != 1){return null;}
                 else {
-                    newPhone.get().setUpdatedDate(new Timestamp(System.currentTimeMillis()));
-                    newPhone.get().setStatus(phone.getStatus());
-                    newPhone.get().setPhone(phone.getPhone());
+                    newPhone.get().setUpdatedDate(java.time.LocalDate.now());
+
+
+                    if(!phone.getPhone().equals("")){
+                        newPhone.get().setPhone(phone.getPhone());
+                    }
+
+
                     newPhone.get().setServiceId(campaign.get().getServiceId());
                     newPhone.get().setTelcoId(campaign.get().getTelcoId());
                     newPhone.get().setRetry(campaign.get().getRetry());
+
                     newPhone.get().setCampaignId(phone.getCampaignId());
                 }
                 phoneReposirity.save(newPhone.get());

@@ -2,9 +2,8 @@ package com.example.SimpleProject.Entities;
 import javax.persistence.*;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 
 import org.hibernate.annotations.ColumnDefault;
 
@@ -56,12 +55,14 @@ public class Campaign extends BaseEntity{
 	
 	@Column(name = "start_time")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-	//@DateTimeFormat(iso = DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+	//JsonFormat(pattern = "yyyy-MM-dd")
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime startTime;
 	
 	@Column(name = "end_time")
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-	//@DateTimeFormat(iso = DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+	//@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime endTime;
 	
 	@Column(name="`voice`")

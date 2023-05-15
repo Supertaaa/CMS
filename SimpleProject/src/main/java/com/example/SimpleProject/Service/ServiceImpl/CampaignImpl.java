@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,6 +36,7 @@ public class CampaignImpl implements CampaignService {
 
     @Override
     public Campaign createCampaign(Campaign campaign) {
+        System.out.println(campaign);
 
         System.out.println(campaign.getName());
 
@@ -45,7 +47,8 @@ public class CampaignImpl implements CampaignService {
 
         Campaign newCampaign =  new Campaign();
 
-        newCampaign.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        //newCampaign.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        newCampaign.setCreatedDate(java.time.LocalDate.now());
         newCampaign.setName(campaign.getName());
         newCampaign.setContent(campaign.getContent());
         newCampaign.setType(campaign.getType());
@@ -65,22 +68,70 @@ public class CampaignImpl implements CampaignService {
     public Campaign updateCampaign(Campaign campaign) {
 
 
-
-        System.out.println(campaign.getContent());
-
         Optional<Campaign> newCampaign = campaignReposirity.findById(campaign.getId());
 
+//        newCampaign.get().setName(campaign.getName());
+//        newCampaign.get().setContent(campaign.getContent());
+//        newCampaign.get().setType(campaign.getType());
+//        newCampaign.get().setServiceId(123);
+//        newCampaign.get().setTelcoId(campaign.getTelcoId());
+//        newCampaign.get().setRetry(campaign.getRetry());
+//        newCampaign.get().setStartTime(campaign.getStartTime());
+//        newCampaign.get().setEndTime(campaign.getEndTime());
+//        newCampaign.get().setVoice(campaign.getVoice());
+
+        System.out.println(campaign.getServiceId());
         if(newCampaign.isPresent()){
-            newCampaign.get().setUpdatedDate(new Timestamp(System.currentTimeMillis()));
-            newCampaign.get().setName(campaign.getName());
-            newCampaign.get().setContent(campaign.getContent());
+            newCampaign.get().setUpdatedDate(java.time.LocalDate.now());
+            if(!campaign.getName().equals("")){
+                newCampaign.get().setName(campaign.getName());
+            }
+            if(!campaign.getContent().equals("")){
+                newCampaign.get().setContent(campaign.getContent());
+            }
+
             newCampaign.get().setType(campaign.getType());
-            newCampaign.get().setServiceId(campaign.getServiceId());
-            newCampaign.get().setTelcoId(campaign.getTelcoId());
-            newCampaign.get().setRetry(campaign.getRetry());
-            newCampaign.get().setStartTime(campaign.getStartTime());
-            newCampaign.get().setEndTime(campaign.getEndTime());
-            newCampaign.get().setVoice(campaign.getVoice());
+
+            if(campaign.getType() == 0){
+                List<Email> listEmail = emailReposirity.findEmailByCampaignId(campaign.getId());
+                for(Email email: listEmail){
+                    email.setServiceId(campaign.getServiceId());
+                    emailReposirity.save(email);
+                }
+            }
+            else if(campaign.getType() == 1){
+                List<Phone> listPhone = phoneReposirity.findPhoneByCampaignId(campaign.getId());
+                for(Phone phone: listPhone){
+                    phone.setTelcoId(campaign.getTelcoId());
+                    phone.setServiceId(campaign.getServiceId());
+                    phoneReposirity.save(phone);
+                }
+            }
+
+
+
+            if(campaign.getServiceId() != 0){
+                newCampaign.get().setServiceId(campaign.getServiceId());
+            }
+            if(campaign.getTelcoId() != 0){
+                newCampaign.get().setTelcoId(campaign.getTelcoId());
+            }
+//            if(campaign.getRetry() != 0){
+//                newCampaign.get().setRetry(campaign.getRetry());
+//            }
+            if(campaign.getStartTime() != null){
+                newCampaign.get().setStartTime(campaign.getStartTime());
+            }
+            if(campaign.getEndTime() != null){
+                newCampaign.get().setEndTime(campaign.getEndTime());
+            }
+            if(campaign.getVoice() != 0){
+                newCampaign.get().setVoice(campaign.getVoice());
+            }
+
+
+
+
 //            if(!newCampaign.get().getFileName().equals(campaign.getFileName())){
 //                try{
 //                    if (newCampaign.get().getType() == 0){
@@ -96,7 +147,7 @@ public class CampaignImpl implements CampaignService {
 //
 //            }
             campaignReposirity.save(newCampaign.get());
-
+//
             return newCampaign.get();
         }
 
@@ -106,6 +157,7 @@ public class CampaignImpl implements CampaignService {
 
     @Override
     public String importPhoneEmail(String idCampaign, MultipartFile fileName) {
+
 
         Optional<Campaign> newCampaign = campaignReposirity.findById(Integer.parseInt(idCampaign));
 
@@ -122,26 +174,30 @@ public class CampaignImpl implements CampaignService {
                     BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                     while ((line = br.readLine()) != null)   //returns a Boolean value
                     {
-                        if(line.split(splitBy).length != 3){return "Fail";}
+
                         Email email = new Email();
-                        email.setStatus(Integer.parseInt(line.split(splitBy)[0]));
-                        email.setCreatedDate(new Timestamp(System.currentTimeMillis()));
-                        email.setUpdatedDate(new Timestamp(System.currentTimeMillis()));
-                        email.setEmail(line.split(splitBy)[1]);
-                        email.setRepeat(Integer.parseInt(line.split(splitBy)[2]));
+
+
+                        email.setCreatedDate(java.time.LocalDate.now());
+                        email.setUpdatedDate(java.time.LocalDate.now());
+
+                        email.setEmail(line.split(splitBy)[0]);
+
                         email.setServiceId(newCampaign.get().getServiceId());
                         email.setCampaignId(newCampaign.get().getId());
-                        if(email.getStatus() == 0){newCampaign.get().setStatus(0);}
+
+
                         emailReposirity.save(email);
                     }
+                    campaignReposirity.save(newCampaign.get());
+                    return "Done";
                 }
                 catch (IOException e)
                 {
                     e.printStackTrace();
                 }
 
-                campaignReposirity.save(newCampaign.get());
-                return "Done";
+
             }
 
             else if(newCampaign.get().getType() == 1){
@@ -153,30 +209,37 @@ public class CampaignImpl implements CampaignService {
                     BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                     while ((line = br.readLine()) != null)   //returns a Boolean value
                     {
-                        if (line.split(splitBy).length != 2){return "Fail";}
+
                         Phone phone = new Phone();
-                        phone.setStatus(Integer.parseInt(line.split(splitBy)[0]));
-                        phone.setCreatedDate(new Timestamp(System.currentTimeMillis()));
-                        phone.setUpdatedDate(new Timestamp(System.currentTimeMillis()));
-                        phone.setPhone(line.split(splitBy)[1]);
+
+
+                        phone.setCreatedDate(java.time.LocalDate.now());
+                        phone.setUpdatedDate(java.time.LocalDate.now());
+
+                        phone.setPhone(line.split(splitBy)[0]);
+
                         phone.setServiceId(newCampaign.get().getServiceId());
                         phone.setTelcoId(newCampaign.get().getTelcoId());
-                        phone.setRetry(newCampaign.get().getRetry());
+
                         phone.setCampaignId(newCampaign.get().getId());
-                        if(phone.getStatus() == 0){newCampaign.get().setStatus(0);}
+
+
                         phoneReposirity.save(phone);
                     }
+                    campaignReposirity.save(newCampaign.get());
+                    return "Done";
+
                 }
                 catch (IOException e)
                 {
                     e.printStackTrace();
                 }
 
-                campaignReposirity.save(newCampaign.get());
-                return "Done";
+
             }
 
         }
+
 
         return "Fail";
     }
@@ -184,7 +247,16 @@ public class CampaignImpl implements CampaignService {
     @Override
     public String delCampaign(int idCampaign) {
         if(campaignReposirity.findById(idCampaign).isPresent()){
+            if(campaignReposirity.findById(idCampaign).get().getType() == 0){
+                emailReposirity.deleteEmails(idCampaign);
+            }
+            else{
+                phoneReposirity.deletePhones(idCampaign);
+            }
             campaignReposirity.deleteById(idCampaign);
+
+
+
             return "Deleted Successfully";
         }
         return "Fail";

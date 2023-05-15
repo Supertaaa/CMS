@@ -1,7 +1,6 @@
 
 $(document).ready(function(){
 
-    
 
     checkUserHosting().then((data) => {
         jsonUrl = data.deploy.url;
@@ -14,34 +13,28 @@ $(document).ready(function(){
             $.ajax({
                 type: "GET",
                 url:jsonUrl+":"+jsonPort+"/user/getRole",
-                //url: "http://localhost:8080/user/getRole",
+                
                 data: { "token": $.cookie("token")},
                 headers:{"Authorization": "Bearer " + $.cookie("token")},
                 success: function(data){
                     if(data == "USER"){
                         window.location.href = "index.html"
                     }
-                    else{
-                        $.ajax({
-                            type: "GET",
-                            url: "http://localhost:8080/user/getUserName",
-                            data: { "token": $.cookie("token")},
-                            headers:{"Authorization": "Bearer " + $.cookie("token")},
-                            success: function(data){
-                                $("#spantag").text(data)
-                            },
-                        })
-                    }
+                    
+                    $.ajax({
+                        type: "GET",
+                        url:jsonUrl+":"+jsonPort+"/user/getUserName",
+                        data: { "token": $.cookie("token")},
+                        headers:{"Authorization": "Bearer " + $.cookie("token")},
+                        success: function(data){
+                            $("#spantag").text(data)
+                        },
+                    })
+                    
                 },
             })
             
         }
         
     })
-
-    
-    
-
-    
-    
 })

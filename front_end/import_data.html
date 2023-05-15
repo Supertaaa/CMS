@@ -100,7 +100,7 @@
                 
                 <select name="datas" id="datas"></select><br>
                 <input type="file" id="file" style="display:none;" />
-                <!-- <button id="importButtom" name="button" value="Upload" onclick="window.location.href = '/import_data.html';">Import Data to Campaign</button> -->
+                
                 <button id="importData" name="button" value="Upload" onclick="thisFileUpload();">Import Data to Campaign</button>
                 
 
@@ -118,7 +118,7 @@
         $("#file").change(function(){
             var formData = new FormData()
 
-            console.log(this.files[0])
+            //console.log(this.files[0])
             formData.append('file', this.files[0])
             formData.append('idCampaign', $('#datas').val())
 
@@ -142,7 +142,7 @@
                     headers:{"Authorization": "Bearer " + $.cookie("token")},
                     success: function(data){
                         if(data.localeCompare("Fail") == 0){
-                            console.log(data)
+                            //console.log(data)
                             alert("Error")
                         }
                         else{
@@ -152,7 +152,7 @@
                         
                     },
                     error: function(){
-                        console.log("Error")
+                        //console.log("Error")
                         alert("Error")
                     }
 

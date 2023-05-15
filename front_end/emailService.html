@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>TuanAnh's Webside</title>
+
+    <!-- Custom fonts for this template-->
+    <script type="text/javascript" src="js/jquery-3.6.4.min"></script>
+    <script src= "https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/table.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="https://cdn.tiny.cloud/1/rypmvjiwro8lo8sn563tsz98iqzlyxg7earogb6u5hr382mc/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="css/rome.css">
+    
+    <script src="js/rome.js"></script>
+
+    <script src="js/main.js"></script>
+    <!-- <script src="js/checkAuthoEmail.js"> -->
+
+    </script>
+    
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+    <script>
+        tinymce.init({
+          selector: 'textarea#editor',
+        });
+      </script>
+    
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">TuanAnh</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active" style="cursor: pointer">
+                <a class="nav-link">
+                    <i class="fas fa-fw fa-tachometer-alt" ></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+            
+            </li>
+            <!-- <button class="createPhone" onclick="showPhoneService()" >Phone Service</button> -->
+            <!-- Nav Item - Charts -->
+            <li class="nav-item" style="cursor: pointer">
+                <a class="nav-link" onclick='window.location.href = "campaignService.html"'>
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Campaign</span></a>
+            </li>
+
+            <li class="nav-item" style="cursor: pointer">
+                <a class="nav-link" onclick='window.location.href = "emailService.html"'>
+                    <i class="fas fa-fw fa-chart-area" style="color:white"></i>
+                    <span style="color:white">Email</span></a>
+            </li>
+
+            <li class="nav-item" style="cursor: pointer">
+                <a class="nav-link" onclick='window.location.href = "phoneService.html"'>
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Phone</span></a>
+            </li>
+            <li class="nav-item" style="cursor: pointer">
+                <a class="nav-link" onclick='window.location.href = "get_static.html"'>
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Static</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li> -->
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+        </ul>
+
+        <!-- Sidebar -->
+        
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                    
+
+                        
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span id="spantag" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                
+                <div id="showAlert"></div>
+
+
+
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    </div>
+                    
+
+                    <!-- Content Row -->
+                    
+                    
+                    
+
+    
+
+                </div>
+                
+                
+                
+
+                <div class="table-wrapper" id = "emailContainer">
+                    <div class="table-title">
+                        <div class="row">
+                            
+                            <div class="col-sm-4">
+                                <a href="#addEmployeeModal" class="btn btn-success" id="buttomAddEmail" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Email</span></a>
+                                <a href="#deleteEmployeeModal" class="btn btn-danger" id="delEmails" data-toggle="modal" style="display:none"><i id="ccc" class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                            </div>
+
+                            
+                        </div>
+                        <div style="display:flex; justify-content: space-between; padding-top: 20px;" >
+                            
+                                
+                            <div class="btn-group submitter-group float-right">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Search</div>
+                                </div>
+                                <input type="text" id="myInputTextField">
+
+                                
+                            </div>
+
+                            <div class="btn-group submitter-group float-right">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Campaign</div>
+                                </div>
+                                <select id="datasCampaignSelectionE" class="form-control status-dropdown">
+                                    
+                                    
+                                </select>
+
+                                
+                            </div>
+
+                            <div class="btn-group submitter-group float-right">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Status</div>
+                                </div>
+                                <select class="form-control status-dropdown" id="statusSelectE">
+                                    <option value="">All</option>
+                                    <option value="Not Started">Not Started</option>
+                                    <option value="Done">Done</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Running">Running</option>
+                                    
+                                </select>
+
+                                
+                            </div>
+                            
+                            <div class="btn-group submitter-group float-right">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Service</div>
+                                </div>
+                                <select id="datasServiceSelectionE" class="form-control status-dropdown">
+                                    
+                                    
+                                </select>
+
+                                
+                            </div>
+                            
+                            
+                            <button type="button" style="margin: 0px; width: 141px" class="btn btn-primary" id="searchButtomSubmit" >Submit</button>
+
+                            
+                        
+                        </div>
+                    </div>
+                    <table class="table table-striped table-hover" id="emailTable" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th >Create Time</th>
+                                <th >Update Time</th>
+                                <th >Campaign ID</th>
+                                <th >Email</th>
+                                <th> Retry</th>
+                                <th> Service ID</th>
+                                <th> Status </th>
+                                <th>Action</th>
+                                
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                
+
+                
+
+                
+
+
+                
+                
+
+            </div>
+            
+
+        </div>
+        
+        <!-- End of Content Wrapper -->
+
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close" id="closeFlag">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a id="sign_out" class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div id="addEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="addEmailForm">
+                    <div class="modal-header">						
+                        <h4 class="modal-title">Add Email</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">					
+                        <div class="form-group">
+                            <label>Campaign</label>
+                            <select name="datas" id="datasAddEmail" class="form-control"></select>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label>Status</label>
+                            <select name="statusEmailA" class="form-control" id="statusEmailA" form="carform">
+                   
+                                <option value="0">Not Started</option>
+                                <option value="1">Done</option>
+                                <option value="2">Running</option>
+                            </select>
+
+                            
+                        </div>		 -->
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" id="Email" required>
+                        </div>
+                        
+                        <!-- <div class="form-group">
+                            <label>Repeat</label>
+                            <input type="text" class="form-control" id="repeatEmail" required>
+                        </div>					 -->
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="button" class="btn btn-success" id="addEmail" value="Add">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="editEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="updateformEmail">
+                    <div class="modal-header">						
+                        <h4 class="modal-title">Edit Email</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">					
+                        <div class="form-group">
+                            <label>Campaign</label>
+                            <select name="datas" id="datasEditEmail" class="form-control"></select>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label>Status</label>
+                            <select name="statusEmailE" class="form-control" id="statusEmailE" form="carform">
+                          
+                                <option value="0">Not Started</option>
+                                <option value="1">Done</option>
+                                <option value="2">Running</option>
+                            </select>
+
+                           
+                        </div>		 -->
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" id="EmailE" >
+                        </div>
+                        
+                        				
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="button" class="btn btn-info" id="updatebuttomEmail" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal HTML -->
+    <div id="deleteEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="delformEmail">
+                    <div class="modal-header">						
+                        <h4 class="modal-title">Delete Email</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">					
+                        <p>Are you sure you want to delete these Records?</p>
+                        <p class="text-warning"><small>This action cannot be undone.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="button" class="btn btn-danger" id="delbuttomEmail" value="Delete">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+
+        function alertSuccess(message){
+            $("#showAlert").append('<div class="alert alert-success alert-dismissible">'+
+                    '<a id="closeAlertSuccess" href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+
+                    '<strong>Success!</strong> ' + message +
+                '</div>')     
+        }
+
+        function alertFail(message){
+            $("#showAlert").append('<div class="alert alert-danger alert-dismissible">'+
+                    '<a id="closeAlertFail" href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+
+                    '<strong>Fail!</strong> ' + message +
+                '</div>')     
+        }
+
+        checkUserHosting().then((data) => {
+
+            jsonUrl = data.deploy.url;
+            jsonPort = data.deploy.port
+
+            $.ajax({
+
+                method: "GET",
+                url: jsonUrl+":"+jsonPort+"/email/getEmailDTO",
+                dataType: "json",
+                headers:{"Authorization": "Bearer " + $.cookie("token")},
+                success: function(mydata){
+                    
+                   
+
+                    var table =$('#emailTable').DataTable({
+                        data: mydata ,
+                        columns: [
+                            { data: "checkbox" , render : function (data, type, row) {
+                                    return '<td><input type="checkbox" id="checkbox1" name="options[]" value='+ row.id +' ><label for="checkbox1"></label></td>'
+                                    }},
+                            { data: "createdDate" },
+                            { data: "updatedDate" },
+                            { data: "campaignId"},
+                            { data: "email" },
+                            { data: "repeat"},
+                            { data: "serviceId" },
+                            { data: "status" },
+                            { data: "action" , render : function (data, type, row) {
+                                return '<td '+ 'style:"display: flex"' +'><button href="#editEmployeeModal" class="editEmail bg-gradient-info btn-sm btn-circle" data-toggle="modal" value='+ row.id +' ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button><button href="#deleteEmployeeModal" class="deleteEmail bg-gradient-danger btn-sm btn-circle" data-toggle="modal" value = ' + row.id + ' ><i class="material-icons" data-toggle="tooltip" title="Delete"> &#xE872; </i> </button> </td>'
+                            }},
+                        ],
+                        
+                        "bLengthChange" : false,
+                        
+                        
+                        //"searching": false
+                        }
+                    )
+
+                    $.ajax({
+                        type: "GET",
+                        url: jsonUrl+":"+jsonPort+"/user/getRole",
+                        //url: "http://localhost:8080/user/getRole",
+                        data: { "token": $.cookie("token")},
+                        headers:{"Authorization": "Bearer " + $.cookie("token")},
+                        success: function(data){
+                            console.log(data)
+                            if(data == "USER"){
+                                
+                            
+
+                                $('#emailTable').DataTable().column(0).visible(false)
+                                $("#buttomAddEmail").remove()
+                                $("#delEmails").remove()
+                                $('#emailTable').DataTable().column(8).visible(false)
+                            }
+                        },
+                    })
+                    
+
+                    $(document).on('click', '#searchButtomSubmit', function(){
+                        // console.log(table)
+                        // console.log($('#myInputTextField').val())
+                        //table.search($('#myInputTextField').val()).column(5).search($("#statusSelect").val()).column(6).search($("typeSelect").val()).draw()
+                        table.search($('#myInputTextField').val()).column(3).search($("#datasCampaignSelectionE").val()).column(7).search($("#statusSelectE").val()).column(6).search($("#datasServiceSelectionE").val()).draw()
+                        
+                    })
+
+
+
+                    
+                    
+                    const delItems = new Set();
+                    
+                    //$("#delEmails").prop('disabled', true);
+
+                    $(document).on('click','#checkbox1',function(){
+                        
+                        //console.log($(this).val())
+                        if(!delItems.has($(this).val())){
+                            delItems.add($(this).val())
+                        }
+                        else{
+                            delItems.delete($(this).val())
+                        }
+                        if(delItems.size != 0){
+                            document.getElementById("delEmails").style.display = "block"
+                        }
+                        else{
+                            document.getElementById("delEmails").style.display = "none"
+
+                        }
+                        //console.log(Array.from(delItems))
+                           
+                    })
+                    
+                        
+                    $(document).on('click','#delbuttomEmail',function(){
+                        document.getElementById('delformEmail').style.display="block"
+                        if(delItems.size != 0){
+                            checkUserHosting().then((data) => {
+                                jsonUrl = data.deploy.url;
+                                jsonPort = data.deploy.port
+
+                                var formData = new FormData()
+                                formData.append("idEmails", Array.from(delItems))
+
+                                $.ajax({
+                                    method: "DELETE",
+                                    url: jsonUrl+":"+jsonPort+"/email/delEmails",
+                                    processData: false,
+                                    contentType: false,
+                                    data: formData,
+                                    dataType: "json",
+                                    encode: true,
+                                    headers:{"Authorization": "Bearer " + $.cookie("token")},
+                                    success: function(res){
+
+                                        
+                                        //$( "#emailTable" ).load( "index.html #emailTable" );
+                                        window.location.reload()
+                                    },
+                                    error: function(res){
+                                    
+                                        $('.modal').modal('hide')
+                                        alertSuccess("Deleted Successfully!")
+                                        $(document).on('click', '#closeAlertSuccess', function(){
+                                            window.location.reload()
+                                        })
+                                        
+                                    }
+                            
+                        
+                                })
+                            })
+                        }
+                        
+                        
+                    })
+                    
+                    
+
+
+                    $(document).on('click','.deleteEmail',function(){
+                        document.getElementById('delformEmail').style.display="block"
+                        id_Obj = $(this).val()
+                        //console.log(id_Obj)
+                        if(id_Obj != null){
+                            $(document).on('click','#delbuttomEmail',function(){
+                            //console.log("ngu")
+
+                                checkUserHosting().then((data) => {
+                                    jsonUrl = data.deploy.url;
+                                    jsonPort = data.deploy.port
+
+                                    $.ajax({
+                                        method: "DELETE",
+                                        url: jsonUrl+":"+jsonPort+"/email/delEmail",
+                                        
+                                        data: {idEmail: id_Obj},
+                                        dataType: "json",
+                                        encode: true,
+                                        headers:{"Authorization": "Bearer " + $.cookie("token")},
+                                        success: function(res){
+                                            
+                                        
+                                        },
+                                        error: function(res){
+                                            
+                                            $('.modal').modal('hide')
+                                            alertSuccess("Deleted Successfully!")
+                                            $(document).on('click', '#closeAlertSuccess', function(){
+                                                window.location.reload()
+                                            })
+                                            
+                                        }
+                                
+
+                                    })
+                                })
+
+                            })
+                        }
+                        
+                        
+                        
+                    })
+
+                    $(document).on('click','#buttomAddEmail',function(){
+
+                        document.getElementById('addEmailForm').style.display = 'block'
+                    })
+                    $(document).on('click','#addEmail',function(){
+                        //console.log("ngu")
+
+                        checkUserHosting().then((data) => {
+                            jsonUrl = data.deploy.url;
+                            jsonPort = data.deploy.port
+
+                            var formData = {
+                                campaignId: $('#datasAddEmail').val(),
+                                //status: $("#statusEmail").val(),
+                                Email: $("#Email").val(),
+                                //repeat: $("#repeatEmail").val(),
+                                
+                            };
+                            console.log(formData)
+
+                            $.ajax({
+                                method: "POST",
+                                url: jsonUrl+":"+jsonPort+"/email/addEmail",
+                                
+                                data: formData,
+                                dataType: "json",
+                                encode: true,
+                                headers:{"Authorization": "Bearer " + $.cookie("token")},
+                                success: function(res){
+                                    // console.log(res)
+                                    // console.log(res.id)
+                                    $('.modal').modal('hide')
+                                    alertSuccess("Email has been added.")
+                                    
+
+                                    //table.row.add([res.createdDate, res.updatedDate, res.campaignId, res.email, res.repeat, res.serviceId, res.status])
+                                    $(document).on('click', '#closeAlertSuccess', function(){
+                                        window.location.reload()
+                                    })
+                                    
+                                },
+                                error: function(res){
+                                    
+                                    
+                                    $('.modal').modal('hide')
+                                    alertFail("Cannot add email, please fill your fields correctly.")
+                                    // $(document).on('click', '#closeAlertFail', function(){
+                                    //     window.location.reload()
+                                    // })
+                                    //alert("Something wrong ! You can try other campaign to match")
+                                    //window.location.reload()
+                                    
+                                }
+                        
+
+                            })
+                        })
+
+                    })
+
+                   
+                    
+                    $(document).on('click','.editEmail',function(){
+                        document.getElementById('updateformEmail').style.display = 'block'
+                        id_Obj = $(this).val()
+                        localStorage.setItem("id_Obj", id_Obj)
+
+                        $.ajax({
+
+                            method: "GET",
+                            url: jsonUrl+":"+jsonPort+"/email/emailById",
+                            data: {idEmail: id_Obj},
+                            dataType: "json",
+                            headers:{"Authorization": "Bearer " + $.cookie("token")},
+                            success: function(mydata){
+                                console.log(mydata)
+                                $("#datasEditEmail").val(mydata.campaignId)
+                                $("#EmailE").val(mydata.email)
+                                //$("#statusEmailE").val(mydata.status)
+                                //$("#repeatEmailE").val(mydata.repeat)
+                                
+
+                            }
+                        })
+                    })
+
+                        //console.log(id_Obj)
+                    $(document).on('click', '#updatebuttomEmail', function(){
+                        //console.log("ngu")
+                        checkUserHosting().then((data) => {
+                            jsonUrl = data.deploy.url;
+                            jsonPort = data.deploy.port
+
+                            var formData = {
+                                id: localStorage.getItem("id_Obj"),
+                                campaignId: $('#datasEditEmail').val(),
+                                //status: $("#statusEmailE").val(),
+                                Email: $("#EmailE").val(),
+                                //repeat: $("#repeatEmailE").val(),
+                            };
+
+                            // if($("#statusEmailE").val() != ""){
+                            //     formData["status"] = $("#statusEmailE").val()
+                            // }
+                            // if($("#repeatEmailE").val() != ""){
+                            //     formData["repeat"] = $("#repeatEmailE").val()
+                            // }
+
+                            console.log(formData)
+
+                            $.ajax({
+                                method: "PUT",
+                                url: jsonUrl+":"+jsonPort+"/email/updateEmail",
+                                //url: "http://localhost:8080/email/updateEmail",
+                                data: formData,
+                                dataType: "json",
+                                encode: true,
+                                headers:{"Authorization": "Bearer " + $.cookie("token")},
+                                success: function(res){
+                                    if(res != null){
+                                        //console.log(res);
+                                        $('.modal').modal('hide')
+                                        alertSuccess("Email has been updated. ")
+                                        $(document).on('click', '#closeAlertSuccess', function(){
+                                            window.location.reload()
+                                        })
+                                    }
+                                    else{
+                                        $('.modal').modal('hide')
+                                        alertFail("Cannot update email, please fill your fields correctly. ")
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                },error: function(){
+                                    $('.modal').modal('hide')
+                                    alertFail()
+                                }
+
+
+                            })
+                        })
+                    })
+
+
+
+                        
+
+                    
+
+                },
+
+            })
+        })
+        
+        
+    </script>
+
+
+    
+    <script>
+        $(document).on('click','#sign_out',function(){
+            var cookies = $.cookie();
+            for(var cookie in cookies) {
+            $.removeCookie(cookie);
+            }
+
+        })
+
+    </script>
+
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    
+
+    <script>
+        $(document).ready(function(){
+
+            checkUserHosting().then((data) => {
+                jsonUrl = data.deploy.url;
+                jsonPort = data.deploy.port
+                
+
+                $.ajax({
+                    type: "GET",
+                    url: jsonUrl+":"+jsonPort+"/user/getUserName",
+                    //url: "http://localhost:8080/user/getUserName",
+                    data: { "token": $.cookie("token")},
+                    headers:{"Authorization": "Bearer " + $.cookie("token")},
+                    success: function(data){
+                        $("#spantag").text(data)
+                    },
+                })
+            })
+                
+
+                
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            if(!$.cookie("token")){
+                window.location.href = "login.html"
+            }
+        })
+    </script>
+
+    <!-- <script>
+        const btnEmail = document.getElementById('delbuttomEmail');
+
+        btnEmail.addEventListener('click', () => {
+            const form = document.getElementById('delformEmail');
+
+            form.style.display = 'none';
+            console.log(form)
+            console.log("Ngu")
+        
+        });
+    </script> -->
+
+    <!-- <script>
+        const btnnEmail = document.getElementById('updatebuttomEmail');
+
+        btnnEmail.addEventListener('click', () => {
+        const form = document.getElementById('updateformEmail');
+
+  
+            // 👇️ this HIDES the form
+        form.style.display = 'none';
+        
+        });
+    </script> -->
+
+   
+
+    <!-- <script>
+        const btnAddEmail = document.getElementById('addEmail');
+
+        btnAddEmail.addEventListener('click', () => {
+        const form = document.getElementById('addEmailForm');
+
+        
+            // 👇️ this HIDES the form
+        form.style.display = 'none';
+        
+        });
+    </script> -->
+
+
+
+    <script src="js/selectE.js" ></script>
+
+
+<!-- <script>
+    $(document).change('start_time', function(){
+        console.log($("#start_time").val())
+    })
+</script> -->
+    
+
+</body>
+
+</html>

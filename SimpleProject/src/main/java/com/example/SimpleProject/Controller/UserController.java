@@ -64,10 +64,9 @@ public class UserController {
     }
 
     @PostMapping(path = "/login")
-    public String login(HttpServletResponse response, User user){
+    public String login( User user){
         if (!userRepository.existsUserByUserName(user.getUserName())){return null;}
         User u = userRepository.findByUserName(user.getUserName()); //gets user object
-
         String password = u.getPassword();
         if (!BCrypt.checkpw(user.getPassword(), password)){
             return null;

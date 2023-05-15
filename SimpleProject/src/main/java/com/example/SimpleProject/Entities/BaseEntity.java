@@ -1,8 +1,9 @@
 package com.example.SimpleProject.Entities;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
-
+import java.time.LocalDate;
 
 
 import org.springframework.data.annotation.CreatedDate;
@@ -26,31 +27,31 @@ public abstract class BaseEntity {
 	
 	@Column(name="created_time")
 	@CreatedDate
-	private Timestamp createdDate;
+	private LocalDate createdDate;
 	
 	@Column(name="updated_time")
 	@LastModifiedDate
-	private Timestamp updatedDate;
+	private LocalDate updatedDate;
 	
-	public Timestamp getCreatedDate() {
-		if(createdDate == null) {
-			return null;
-		}
-		return new Timestamp(createdDate.getTime());
-	}
+//	public LocalDate getCreatedDate() {
+//		if(createdDate == null) {
+//			return null;
+//		}
+//		return new  LocalDate(createdDate.);
+//	}
 
-	public void setCreatedDate(Timestamp createdDate) {
-		this.createdDate = (createdDate == null ? null :new Timestamp(createdDate.getTime()));
-	}
+//	public void setCreatedDate(Timestamp createdDate) {
+//		this.createdDate = (createdDate == null ? null :new Timestamp(createdDate.getTime()));
+//	}
 
-	public Timestamp getUpdatedDate() {
-		if(updatedDate ==null) {
-			return null;
-		}
-		return new Timestamp(updatedDate.getTime());
-	}
+//	public Timestamp getUpdatedDate() {
+//		if(updatedDate ==null) {
+//			return null;
+//		}
+//		return new Timestamp(updatedDate.getTime());
+//	}
 
-	public void setUpdatedDate(Timestamp updatedDate) {
-		this.updatedDate = (updatedDate == null ? null : new Timestamp(updatedDate.getTime()));
-	}
+//	public void setUpdatedDate(Timestamp updatedDate) {
+//		this.updatedDate = (updatedDate == null ? null : new Timestamp(updatedDate.getTime()));
+//	}
 }
